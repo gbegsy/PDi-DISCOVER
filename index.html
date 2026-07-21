@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PDi DISCOVER™ Operational Learning System</title>
+<style>
+:root{
+  --navy:#071b3d;--navy2:#0d2d5f;--blue:#1d5a96;--gold:#d7b15b;--bg:#f4f7fb;--card:#fff;--text:#162033;--muted:#65758f;--line:#dbe5f2;--red:#b42318;--amber:#b86b00;--green:#087443;--purple:#5b3fb7;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.app{display:grid;grid-template-columns:292px 1fr;min-height:100vh}.sidebar{background:linear-gradient(180deg,var(--navy),#041126);color:#fff;padding:24px;position:sticky;top:0;height:100vh;overflow:auto}.brand{font-size:32px;font-weight:900;letter-spacing:-.5px}.brand span{font-weight:300}.tag{color:var(--gold);font-size:14px;line-height:1.42;margin:8px 0 18px}.nav{display:grid;gap:8px}.nav button{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:13px;padding:12px 13px;text-align:left;cursor:pointer;font-weight:650}.nav button:hover,.nav button.active{border-color:var(--gold);background:rgba(215,177,91,.14)}.side-note{margin-top:18px;color:#bfd0e8;font-size:12px;line-height:1.45}.main{padding:26px;max-width:1620px;width:100%}.screen{display:none}.screen.active{display:block}.topbar{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:16px}.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 4px 14px rgba(15,35,75,.06)}.hero{background:linear-gradient(135deg,#fff,#eef4fb);border:1px solid var(--line);border-radius:22px;padding:22px;margin-bottom:16px}h1,h2,h3{margin:0 0 10px}h1{font-size:32px}h2{font-size:24px;color:var(--navy)}h3{font-size:18px;color:var(--navy2)}p{margin:0 0 12px;color:var(--muted);line-height:1.48}.grid{display:grid;gap:16px}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}.five{grid-template-columns:repeat(5,1fr)}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{background:var(--gold);border:0;color:#111;border-radius:12px;padding:11px 15px;font-weight:850;cursor:pointer}.btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn.blue{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff}.btn.red{background:var(--red);color:#fff}label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.03em;font-weight:850;color:var(--navy);margin:0 0 6px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;font:inherit;background:#fff;color:var(--text)}textarea{resize:vertical;min-height:88px}.small{min-height:56px}.medium{min-height:130px}.big{min-height:200px}table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}th,td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{background:#edf3fa;color:var(--navy);font-size:12px;text-transform:uppercase}tr:last-child td{border-bottom:0}.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}.kpi .n{font-size:30px;font-weight:900;color:var(--navy)}.kpi .label{font-size:13px;color:var(--muted)}.badge{display:inline-block;border-radius:999px;padding:5px 9px;font-weight:850;font-size:12px}.good{background:#def7eb;color:var(--green)}.watch{background:#fff1cc;color:var(--amber)}.bad{background:#fde2df;color:var(--red)}.infoB{background:#e9edff;color:var(--purple)}.steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;position:sticky;top:0;background:rgba(244,247,251,.96);padding:8px 0;z-index:5}.steps button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;cursor:pointer;color:var(--navy);font-weight:750}.steps button.active{background:var(--navy);color:#fff;border-color:var(--navy)}.step{display:none}.step.active{display:block}.note{font-size:13px;color:var(--muted)}.alert{padding:12px;border-radius:13px;background:#fff1cc;border:1px solid #f5cc75;color:#5f3900;margin-top:12px}.success{padding:12px;border-radius:13px;background:#def7eb;border:1px solid #9be1bd;color:#075936;margin-top:12px}.danger{padding:12px;border-radius:13px;background:#fde2df;border:1px solid #f4aaa3;color:#7a1d15;margin-top:12px}.tickgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px 14px}.tickgrid label{display:flex;gap:8px;align-items:flex-start;text-transform:none;font-weight:600;color:var(--text);font-size:14px}.tickgrid input{width:auto;margin-top:2px}.flow{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin-top:14px}.flow div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;min-height:92px}.flow b{display:block;color:var(--gold);font-size:24px}.report{white-space:pre-wrap;background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:16px;min-height:520px}.strength{font-weight:850}.bowtie{display:grid;grid-template-columns:1fr 60px 1fr 1fr 1fr 60px 1fr;gap:10px;align-items:stretch}.btbox{border:1px solid var(--line);background:#f8fafc;border-radius:16px;padding:14px;min-height:118px;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column}.btbox.hazard{background:#fff8e2;border-color:#e8c56b}.btbox.event{background:#fde2df;border-color:#e3958c}.arrow{display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--gold);font-weight:900}.quality-list{display:grid;gap:10px}.quality-list div{padding:12px;border-radius:12px;border:1px solid var(--line);background:#fbfdff}.hidden{display:none}.matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.matrix .cell{background:#fbfdff;border:1px solid var(--line);border-radius:14px;padding:12px}.muted{color:var(--muted)}
+@media(max-width:1120px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.two,.three,.four,.five,.flow,.bowtie,.tickgrid,.matrix{grid-template-columns:1fr}.arrow{display:none}.topbar{display:block}}
+@media print{.sidebar,.topbar,.nav,.toolbar,.steps{display:none!important}.app{display:block}.main{padding:0;max-width:none}.screen{display:none!important}#report.screen{display:block!important}.panel,.card{box-shadow:none;border:0}.report{border:0;background:white}body{background:white}}
+.ai-hero{background:linear-gradient(135deg,#071b3d,#174d84);color:#fff}.ai-hero h2,.ai-hero p{color:#fff}.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.ai-card{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}.ai-card h3{margin-bottom:6px}.ai-status{border-left:5px solid var(--purple);background:#f1efff;padding:14px;border-radius:10px;margin-top:14px}.ai-review{border:1px solid #f0c66b;background:#fff8df;padding:13px;border-radius:12px;color:#5f3900}.ai-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#18a66a;margin-right:7px}@media(max-width:1120px){.ai-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">pdi <span>DISCOVER™</span>
+</div>
+  <div class="tag">Operational Learning System<br>Find the truth. Fix the system. Verify improvement.</div>
+  <div class="nav" id="nav">
+    <button class="active" onclick="showScreen('dashboard',this)">Executive Dashboard</button>
+    <button onclick="showScreen('aiassist',this)">✦ AI Assist</button>
+    <button onclick="showScreen('setup',this)">Case Setup</button>
+    <button onclick="showScreen('workflow',this)">DISCOVER Workflow</button>
+    <button onclick="showScreen('learning',this)">Learning Intelligence</button>
+    <button onclick="showScreen('quality',this)">Quality Gate</button>
+    <button onclick="showScreen('report',this)">Executive Report</button>
+  </div>
+  <div class="side-note"><b>Prototype playground</b><br>Starts blank and saves to this browser only. Export a case file if you need to move it to another device. Do not enter sensitive personal information.</div>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div>
+<h1>DISCOVER™ Operational Learning System</h1>
+<p>Incident investigation, assurance finding review and action effectiveness verification in one simple flow.</p>
+</div>
+    <div class="toolbar" style="margin-top:0">
+<button class="btn" onclick="loadExample()">Load worked example</button>
+<button class="btn secondary" onclick="autoAnalyse()">Auto-suggest themes</button>
+<button class="btn secondary" onclick="saveLocal()">Save</button>
+<button class="btn secondary" onclick="loadLocal()">Load</button>
+<button class="btn secondary" onclick="exportCase()">Export case</button>
+<button class="btn secondary" onclick="qs('#caseFile').click()">Import case</button>
+<input id="caseFile" class="hidden" type="file" accept="application/json,.json" onchange="importCase(this.files[0]);this.value=''">
+<button class="btn red" onclick="resetAll()">Reset</button>
+</div>
+  </div>
+
+  <section id="dashboard" class="screen active">
+    <div class="hero">
+<h1>From action closure to verified improvement</h1>
+<p>DISCOVER is positioned as an operational learning and assurance framework: Event → Cause → Barrier → Effective Recommendations → Verification → Effectiveness Review → System Health.</p>
+<div class="flow">
+<div>
+<b>D</b>Define<br>
+<span class="muted">What happened?</span>
+</div>
+<div>
+<b>I</b>Identify<br>
+<span class="muted">What is proven?</span>
+</div>
+<div>
+<b>S</b>Sequence<br>
+<span class="muted">How did it unfold?</span>
+</div>
+<div>
+<b>C</b>Causes<br>
+<span class="muted">Why was it possible?</span>
+</div>
+<div>
+<b>O</b>Organisation<br>
+<span class="muted">What system signals?</span>
+</div>
+<div>
+<b>V</b>Verify<br>
+<span class="muted">What is confirmed?</span>
+</div>
+<div>
+<b>E</b>Effective Recommendations<br>
+<span class="muted">What will reduce risk?</span>
+</div>
+<div>
+<b>R</b>Review<br>
+<span class="muted">Did it work?</span>
+</div>
+</div>
+</div>
+    <div class="grid four">
+<div class="kpi">
+<div class="label">System Health</div>
+<div class="n" id="kHealth">-</div>
+<span id="kHudson" class="badge watch">Not assessed</span>
+</div>
+<div class="kpi">
+<div class="label">Weakest Barrier</div>
+<div class="n" id="kBarrier">-</div>
+<span class="badge bad">Priority</span>
+</div>
+<div class="kpi">
+<div class="label">Action Strength</div>
+<div class="n" id="kStrength">-</div>
+<span id="kStrengthTag" class="badge watch">Needs review</span>
+</div>
+<div class="kpi">
+<div class="label">Effectiveness Status</div>
+<div class="n" id="kEffective">-</div>
+<span id="kEffTag" class="badge infoB">Open</span>
+</div>
+</div>
+    <div class="grid two" style="margin-top:16px">
+<div class="panel">
+<h2>Commercial value proposition</h2>
+<table>
+<tr>
+<th>Traditional investigation</th>
+<th>DISCOVER</th>
+</tr>
+<tr>
+<td>Finds causes and raises actions.</td>
+<td>Links causes, barriers, actions, verification and effectiveness review.</td>
+</tr>
+<tr>
+<td>Often closes when actions are complete.</td>
+<td>Closes when improvement is evidenced.</td>
+</tr>
+<tr>
+<td>Limited dashboard value.</td>
+<td>Creates system health signals and repeat-finding intelligence.</td>
+</tr>
+</table>
+</div>
+<div class="panel">
+<h2>Use cases</h2>
+<p>
+<b>Incidents:</b> near miss, HiPo, injury, process safety event.</p>
+<p>
+<b>Assurance:</b> PTW deviation, audit finding, repeat non-conformance.</p>
+<p>
+<b>Leadership:</b> verify whether corrective actions have reduced operational risk.</p>
+</div>
+</div>
+  </section>
+
+  <section id="aiassist" class="screen">
+    <div class="panel ai-hero"><h2>✦ DISCOVER AI Assist</h2><p>Turn the initial case description, facts and evidence into a structured first draft. Suggestions only populate blank fields.</p><div><span class="ai-dot"></span><b>Prototype reasoning engine:</b> all processing stays inside this browser; no case information is transmitted.</div></div>
+    <div class="ai-review" style="margin:16px 0"><b>Investigator review required.</b> AI suggestions are hypotheses, not findings. Check every statement against evidence, remove unsupported assumptions and verify recommendations with competent personnel.</div>
+    <div class="panel"><h2>Source material</h2><p>Enter at least a problem statement and some known facts in the DISCOVER workflow, then select an assist function.</p><div class="grid three"><div class="kpi"><div class="label">Problem statement</div><div class="n" id="aiProblemState">Missing</div></div><div class="kpi"><div class="label">Facts</div><div class="n" id="aiFactsState">Missing</div></div><div class="kpi"><div class="label">Evidence</div><div class="n" id="aiEvidenceState">Missing</div></div></div></div>
+    <div class="ai-grid" style="margin-top:16px">
+      <div class="ai-card"><h3>Analyse complete case</h3><p>Draft causes, 5 Whys, operational reality, Human Factors, barriers, recommendations and review criteria.</p><button class="btn blue" onclick="aiDraftAll()">Analyse and populate</button></div>
+      <div class="ai-card"><h3>Draft causes</h3><p>Create editable immediate cause, system cause, 5 Whys and causal statement.</p><button class="btn secondary" onclick="aiDraftCauses()">Draft causal analysis</button></div>
+      <div class="ai-card"><h3>Suggest barriers</h3><p>Identify a starter set of preventive, mitigating and management-system barriers.</p><button class="btn secondary" onclick="aiDraftBarriers()">Suggest barriers</button></div>
+      <div class="ai-card"><h3>Strengthen recommendations</h3><p>Create recommendations linked to weak barriers with verification measures.</p><button class="btn secondary" onclick="aiDraftRecommendations()">Draft recommendations</button></div>
+      <div class="ai-card"><h3>Build event sequence</h3><p>Convert factual sentences into an editable sequence for investigation.</p><button class="btn secondary" onclick="aiDraftSequence()">Draft sequence</button></div>
+      <div class="ai-card"><h3>Prepare executive output</h3><p>Run the quality gate and generate the current executive report.</p><button class="btn secondary" onclick="aiPrepareReport()">Prepare report</button></div>
+    </div>
+    <div id="aiStatus" class="ai-status"><b>Ready.</b> Add source information, or load the worked example to explore the full AI-assisted flow.</div>
+  </section>
+
+  <section id="setup" class="screen">
+<div class="panel">
+<h2>Case Setup</h2>
+<div class="grid three">
+<div>
+<label>Case ID</label>
+<input data-key="caseId" placeholder="DISC-001">
+</div>
+<div>
+<label>Title</label>
+<input data-key="title" placeholder="Short event title">
+</div>
+<div>
+<label>Date / Time</label>
+<input type="datetime-local" data-key="date">
+</div>
+<div>
+<label>Asset / Site</label>
+<input data-key="site">
+</div>
+<div>
+<label>Investigation Level</label>
+<select data-key="level">
+<option>Lite</option>
+<option>Plus</option>
+<option>Major Event</option>
+</select>
+</div>
+<div>
+<label>Event / Finding Type</label>
+<select data-key="type">
+<option>Incident</option>
+<option>Near miss</option>
+<option>HiPo</option>
+<option>Assurance finding</option>
+<option>Repeat deviation</option>
+<option>Process safety event</option>
+</select>
+</div>
+</div>
+<div class="grid two" style="margin-top:16px">
+<div>
+<label>Actual consequence</label>
+<select data-key="actual">
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+<option>Major</option>
+</select>
+</div>
+<div>
+<label>Credible worst case</label>
+<select data-key="potential">
+<option>Low</option>
+<option>Medium</option>
+<option selected>High</option>
+<option>Major</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+
+  <section id="workflow" class="screen">
+<div class="steps" id="steps">
+<button class="active" onclick="showStep('d',this)">D Define</button>
+<button onclick="showStep('i',this)">I Identify</button>
+<button onclick="showStep('s',this)">S Sequence</button>
+<button onclick="showStep('c',this)">C Causes</button>
+<button onclick="showStep('o',this)">O Organisational</button>
+<button onclick="showStep('v',this)">V Verify</button>
+<button onclick="showStep('e',this)">E Effective Recommendations</button>
+<button onclick="showStep('r',this)">R Review</button>
+</div>
+    <div id="d" class="step active panel">
+<h2>D — Define the problem</h2>
+<div class="grid two">
+<div>
+<label>Problem statement</label>
+<textarea class="big" data-key="problem" placeholder="Describe what happened in one factual sentence.">
+</textarea>
+</div>
+<div>
+<label>Why it matters</label>
+<textarea class="big" data-key="whyMatters" placeholder="Potential consequence, repeat pattern, regulatory concern or operational impact.">
+</textarea>
+</div>
+<div>
+<label>Terms of reference</label>
+<textarea data-key="tor" placeholder="Scope, boundaries, exclusions.">
+</textarea>
+</div>
+<div>
+<label>Immediate actions taken</label>
+<textarea data-key="immediate">
+</textarea>
+</div>
+</div>
+</div>
+    <div id="i" class="step panel">
+<h2>I — Identify facts and evidence</h2>
+<div class="grid two">
+<div>
+<label>Facts only</label>
+<textarea class="big" data-key="facts">
+</textarea>
+</div>
+<div>
+<label>Evidence / gaps</label>
+<textarea class="big" data-key="evidence">
+</textarea>
+</div>
+<div>
+<label>Documents reviewed</label>
+<textarea data-key="docs" placeholder="Permits, procedures, risk assessments, photos, witness notes.">
+</textarea>
+</div>
+<div>
+<label>What is not yet proven?</label>
+<textarea data-key="unproven">
+</textarea>
+</div>
+</div>
+</div>
+    <div id="s" class="step panel">
+<h2>S — Sequence of events</h2>
+<table id="seqTable">
+<thead>
+<tr>
+<th>Time</th>
+<th>What happened</th>
+<th>Barrier / decision point</th>
+<th>Evidence</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<div class="toolbar">
+<button class="btn secondary" onclick="addSeq()">Add sequence row</button>
+</div>
+</div>
+    <div id="c" class="step panel">
+<h2>C — Causes and operational reality</h2>
+<div class="grid two">
+<div>
+<label>Immediate cause</label>
+<textarea data-key="immediateCause">
+</textarea>
+</div>
+<div>
+<label>Underlying / system cause</label>
+<textarea data-key="systemCause">
+</textarea>
+</div>
+<div>
+<label>Work as imagined</label>
+<textarea class="big" data-key="imagined" placeholder="How the procedure, plan or leadership expectation assumes work is done.">
+</textarea>
+</div>
+<div>
+<label>Work as done</label>
+<textarea class="big" data-key="done" placeholder="How the work was actually done in the field.">
+</textarea>
+</div>
+</div>
+<div class="alert">Avoid stopping at “human error” or “procedure not followed”. Ask why the system made that behaviour possible or likely.</div>
+<div class="grid two" style="margin-top:16px">
+<div><label>5 Whys pathway</label><textarea data-key="fiveWhys" class="big" placeholder="Why 1:&#10;Why 2:&#10;Why 3:&#10;Why 4:&#10;Why 5:"></textarea></div>
+<div><label>Causal statement</label><textarea data-key="causalStatement" class="big" placeholder="Because [condition], [action or event] occurred, which resulted in [consequence]."></textarea></div>
+</div>
+<div class="toolbar"><button class="btn blue" onclick="showScreen('barriers')">Assess barriers and bow tie</button></div>
+</div>
+    <div id="o" class="step panel">
+<h2>O — Organisational & Human Factors</h2>
+<p>Describe how system conditions shaped decisions and behaviour. This is not a judgement of the individual.</p>
+<div class="tickgrid">
+<label>
+<input type="checkbox" data-check="org" value="Planning assumptions">Planning assumptions</label>
+<label>
+<input type="checkbox" data-check="org" value="Schedule pressure">Schedule pressure</label>
+<label>
+<input type="checkbox" data-check="org" value="Competence / familiarity">Competence / familiarity</label>
+<label>
+<input type="checkbox" data-check="org" value="Supervision / oversight">Supervision / oversight</label>
+<label>
+<input type="checkbox" data-check="org" value="Procedure usability">Procedure usability</label>
+<label>
+<input type="checkbox" data-check="org" value="Communication / handover">Communication / handover</label>
+<label>
+<input type="checkbox" data-check="org" value="Resource constraints">Resource constraints</label>
+<label>
+<input type="checkbox" data-check="org" value="Assurance weakness">Assurance weakness</label>
+<label>
+<input type="checkbox" data-check="org" value="Leadership monitoring">Leadership monitoring</label>
+<label><input type="checkbox" data-check="org" value="Fatigue / workload">Fatigue / workload</label>
+<label><input type="checkbox" data-check="org" value="Equipment / interface design">Equipment / interface design</label>
+<label><input type="checkbox" data-check="org" value="Team dynamics">Team dynamics</label>
+</div>
+<div style="margin-top:16px">
+<label>Organisational & Human Factors learning statement</label>
+<textarea data-key="orgStatement" class="medium">
+</textarea>
+</div>
+<div style="margin-top:16px"><label>Relevant Life-Saving Rules</label><div class="tickgrid">
+<label><input type="checkbox" data-check="org" value="LSR: Bypassing Safety Controls">Bypassing Safety Controls</label>
+<label><input type="checkbox" data-check="org" value="LSR: Confined Space">Confined Space</label>
+<label><input type="checkbox" data-check="org" value="LSR: Driving">Driving</label>
+<label><input type="checkbox" data-check="org" value="LSR: Energy Isolation">Energy Isolation</label>
+<label><input type="checkbox" data-check="org" value="LSR: Hot Work">Hot Work</label>
+<label><input type="checkbox" data-check="org" value="LSR: Line of Fire">Line of Fire</label>
+<label><input type="checkbox" data-check="org" value="LSR: Safe Mechanical Lifting">Safe Mechanical Lifting</label>
+<label><input type="checkbox" data-check="org" value="LSR: Work Authorisation">Work Authorisation</label>
+<label><input type="checkbox" data-check="org" value="LSR: Working at Height">Working at Height</label>
+</div></div>
+</div>
+    <div id="v" class="step panel">
+<h2>V — Verify findings</h2>
+<div class="grid two">
+<div>
+<label>How were findings verified?</label>
+<textarea data-key="verifiedBy" class="medium" placeholder="Triangulate evidence: documents, interviews, observation, system data.">
+</textarea>
+</div>
+<div>
+<label>Confidence level</label>
+<select data-key="confidence">
+<option>Low</option>
+<option selected>Medium</option>
+<option>High</option>
+</select>
+<div class="note" style="margin-top:10px">High confidence should mean the finding is supported by more than one evidence source.</div>
+</div>
+</div>
+</div>
+    <div id="e" class="step panel">
+<h2>E — Effective Recommendations</h2>
+<p>Recommendations should be more than actions. They must directly address causes or weak barriers, be strong enough to reduce risk, and define how effectiveness will be proven.</p>
+<div class="grid two">
+<div>
+<label>Recommendation strategy</label>
+<textarea data-key="recStrategy" class="medium" placeholder="Explain the overall recommendation logic: which causes/barriers are being addressed and why these actions are proportionate.">
+</textarea>
+</div>
+<div>
+<label>Effectiveness measures</label>
+<textarea data-key="recMeasures" class="medium" placeholder="Define the evidence that will prove the recommendations worked, e.g. sampled assurance, no repeat findings, observed compliance, control health improvement.">
+</textarea>
+</div>
+</div>
+<div class="grid three" style="margin-top:16px">
+<div class="card">
+<h3>Weak</h3>
+<p>Brief, remind, email, toolbox talk only.</p>
+<span class="badge bad">May not reduce risk</span>
+</div>
+<div class="card">
+<h3>Better</h3>
+<p>Procedure, checklist, permit prompt, supervisor hold point.</p>
+<span class="badge watch">Changes the system</span>
+</div>
+<div class="card">
+<h3>Strong</h3>
+<p>Engineered control, independent verification, hard barrier, sampled assurance.</p>
+<span class="badge good">Verifies improvement</span>
+</div>
+</div>
+<div class="toolbar">
+<button class="btn blue" onclick="showScreen('actions')">Open recommendation tracker</button>
+<button class="btn secondary" onclick="suggestActions()">Suggest stronger recommendations</button>
+</div>
+</div>
+    <div id="r" class="step panel">
+<h2>R — Review effectiveness and reinforce learning</h2>
+<div class="grid two">
+<div>
+<label>Where else could this happen?</label>
+<textarea data-key="whereElse" class="medium">
+</textarea>
+</div>
+<div>
+<label>Learning transfer required</label>
+<textarea data-key="transfer" class="medium">
+</textarea>
+</div>
+<div>
+<label>Effectiveness review plan</label>
+<textarea data-key="reviewPlan" placeholder="What will be checked after 30/60/90 days?">
+</textarea>
+</div>
+<div>
+<label>Closure criteria</label>
+<textarea data-key="closureCriteria" placeholder="Define what evidence is required before closure.">
+</textarea>
+</div>
+</div>
+</div>
+  </section>
+
+  <section id="barriers" class="screen">
+<div class="panel">
+<h2>Barrier & Bow Tie View</h2>
+<p>Use this to show the client that DISCOVER is not just root cause analysis; it tests whether controls were defined, present, effective and verified.</p>
+<div class="bowtie">
+<div class="btbox">
+<b>Threats</b>
+<textarea data-key="threats" class="small" placeholder="e.g. trapped pressure, schedule pressure">
+</textarea>
+</div>
+<div class="arrow">→</div>
+<div class="btbox hazard">
+<b>Preventive barriers</b>
+<span id="preBarriers">-</span>
+</div>
+<div class="btbox event">
+<b>Top event</b>
+<textarea data-key="topEvent" class="small">
+</textarea>
+</div>
+<div class="btbox">
+<b>Mitigating barriers</b>
+<span id="mitBarriers">-</span>
+</div>
+<div class="arrow">→</div>
+<div class="btbox">
+<b>Consequences</b>
+<textarea data-key="consequences" class="small">
+</textarea>
+</div>
+</div>
+</div>
+<div class="panel" style="margin-top:16px">
+<h2>Critical Barrier Check</h2>
+<table id="barrierTable">
+<thead>
+<tr>
+<th>Barrier</th>
+<th>Type</th>
+<th>Defined?</th>
+<th>Present?</th>
+<th>Effective?</th>
+<th>Verified?</th>
+<th>Status</th>
+<th>Evidence / comment</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<div class="toolbar">
+<button class="btn secondary" onclick="addBarrier()">Add barrier</button>
+<button class="btn secondary" onclick="suggestBarriers()">Suggest common barriers</button>
+</div>
+</div>
+</section>
+
+  <section id="actions" class="screen">
+<div class="panel">
+<h2>E — Effective Recommendations Tracker</h2>
+<p>Every recommendation should link to a cause or weak barrier, be strong enough to reduce risk, have an owner, define verification, and state what effectiveness evidence is required.</p>
+<table id="actionTable">
+<thead>
+<tr>
+<th>Finding / cause</th>
+<th>Action</th>
+<th>Barrier strengthened</th>
+<th>Owner</th>
+<th>Due</th>
+<th>Action strength</th>
+<th>Verification method</th>
+<th>Effectiveness evidence</th>
+<th>Status</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<div class="toolbar">
+<button class="btn secondary" onclick="addAction()">Add action</button>
+<button class="btn secondary" onclick="suggestActions()">Suggest stronger actions</button>
+</div>
+</div>
+<div class="grid three" style="margin-top:16px">
+<div class="card">
+<h3>Weak action</h3>
+<p>Re-brief, remind, communicate.</p>
+<span class="badge bad">Low strength</span>
+</div>
+<div class="card">
+<h3>Better action</h3>
+<p>Change procedure, checklist, permit prompt, supervision requirement.</p>
+<span class="badge watch">Medium strength</span>
+</div>
+<div class="card">
+<h3>Strong action</h3>
+<p>Engineer out, automate, hard barrier, independent verification and sampled assurance.</p>
+<span class="badge good">High strength</span>
+</div>
+</div>
+</section>
+
+  <section id="learning" class="screen">
+<div class="panel">
+<h2>Learning Intelligence</h2>
+<p>These are the themes that make DISCOVER a product, because they can trend across multiple investigations and assurance findings.</p>
+<table id="themeTable">
+<thead>
+<tr>
+<th>Theme</th>
+<th>Signal</th>
+<th>Classification</th>
+<th>Leadership question</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<div class="toolbar">
+<button class="btn secondary" onclick="addTheme()">Add theme</button>
+<button class="btn secondary" onclick="autoAnalyse()">Auto-suggest themes</button>
+</div>
+</div>
+<div class="panel" style="margin-top:16px">
+<h2>Repeat learning check</h2>
+<div class="grid two">
+<div>
+<label>Repeat event / repeat finding?</label>
+<select data-key="repeat">
+<option>No</option>
+<option>Potentially</option>
+<option>Yes</option>
+</select>
+</div>
+<div>
+<label>Previous similar cases / audits</label>
+<textarea data-key="previousSimilar">
+</textarea>
+</div>
+</div>
+</div>
+</section>
+
+  <section id="quality" class="screen">
+<div class="panel">
+<h2>Quality Gate</h2>
+<p>Before the report is issued, the tool checks whether the investigation is strong enough to support decision-making.</p>
+<div class="quality-list" id="qualityList">
+</div>
+<div class="toolbar">
+<button class="btn" onclick="runQualityGate()">Run quality gate</button>
+<button class="btn secondary" onclick="generateReport();showScreen('report')">Generate report</button>
+</div>
+</div>
+</section>
+
+  <section id="report" class="screen">
+<div class="panel">
+<h2>Executive Report</h2>
+<p>Client-ready narrative focused on learning, assurance and verified improvement.</p>
+<div class="toolbar">
+<button class="btn" onclick="generateReport()">Refresh report</button>
+<button class="btn secondary" onclick="copyReport()">Copy report</button>
+<button class="btn secondary" onclick="window.print()">Print / Save PDF</button>
+<button class="btn secondary" onclick="downloadReport()">Download .txt</button>
+</div>
+<pre class="report" id="reportText">Click “Refresh report” to generate the executive output.</pre>
+</div>
+</section>
+</main>
+</div>
+<script>
+const qs=s=>document.querySelector(s); const qsa=s=>Array.from(document.querySelectorAll(s)); const val=k=>(qs(`[data-key="${k}"]`)||{}).value||''; const set=(k,v)=>{let e=qs(`[data-key="${k}"]`); if(e)e.value=v||''}; const esc=s=>String(s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+function showScreen(id,btn){qsa('.screen').forEach(s=>s.classList.remove('active'));qs('#'+id).classList.add('active');qsa('.nav button').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); refreshAll();updateAiState();}
+function showStep(id,btn){qsa('.step').forEach(s=>s.classList.remove('active'));qs('#'+id).classList.add('active');qsa('.steps button').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active');}
+function rowInput(v='',cls='small'){return `<textarea class="${cls}" oninput="refreshAll()">${esc(v)}</textarea>`} function sel(opts,v){return `<select onchange="refreshAll()">${opts.map(o=>`<option ${o==v?'selected':''}>${o}</option>`).join('')}</select>`}
+function addSeq(a={}){qs('#seqTable tbody').insertAdjacentHTML('beforeend',`<tr>
+<td>
+<input value="${esc(a.time)}" oninput="refreshAll()">
+</td>
+<td>${rowInput(a.event)}</td>
+<td>${rowInput(a.point)}</td>
+<td>${rowInput(a.evidence)}</td>
+<td>
+<button class="btn red" onclick="this.closest('tr').remove();refreshAll()">Remove</button>
+</td>
+</tr>`)}
+function addBarrier(a={}){qs('#barrierTable tbody').insertAdjacentHTML('beforeend',`<tr>
+<td>
+<input value="${esc(a.name)}" oninput="refreshAll()">
+</td>
+<td>${sel(['Preventive','Mitigating','Recovery','Management system'],a.type||'Preventive')}</td>
+<td>${sel(['Yes','Partly','No'],a.defined||'Yes')}</td>
+<td>${sel(['Yes','Partly','No'],a.present||'Yes')}</td>
+<td>${sel(['Yes','Partly','No'],a.effective||'Partly')}</td>
+<td>${sel(['Yes','Partly','No'],a.verified||'Partly')}</td>
+<td>
+<span class="badge watch">Auto</span>
+</td>
+<td>${rowInput(a.comment)}</td>
+<td>
+<button class="btn red" onclick="this.closest('tr').remove();refreshAll()">Remove</button>
+</td>
+</tr>`);refreshAll()}
+function addAction(a={}){qs('#actionTable tbody').insertAdjacentHTML('beforeend',`<tr>
+<td>${rowInput(a.finding)}</td>
+<td>${rowInput(a.action)}</td>
+<td>
+<input value="${esc(a.barrier)}" oninput="refreshAll()">
+</td>
+<td>
+<input value="${esc(a.owner)}" oninput="refreshAll()">
+</td>
+<td>
+<input type="date" value="${esc(a.due)}" oninput="refreshAll()">
+</td>
+<td>${sel(['Low - briefing / reminder','Medium - process change','High - engineered / verified control'],a.strength||'Medium - process change')}</td>
+<td>${rowInput(a.verify)}</td>
+<td>${rowInput(a.evidence)}</td>
+<td>${sel(['Open','Implemented','Effectiveness verified','Ineffective / further action'],a.status||'Open')}</td>
+<td>
+<button class="btn red" onclick="this.closest('tr').remove();refreshAll()">Remove</button>
+</td>
+</tr>`);refreshAll()}
+function addTheme(a={}){qs('#themeTable tbody').insertAdjacentHTML('beforeend',`<tr>
+<td>
+<input value="${esc(a.theme)}" oninput="refreshAll()">
+</td>
+<td>${rowInput(a.signal)}</td>
+<td>${sel(['Control of Work','Barrier Management','Operational Reality','Human Factors','Leadership & Assurance','Competence','Communication'],a.classification||'Operational Reality')}</td>
+<td>${rowInput(a.question)}</td>
+<td>
+<button class="btn red" onclick="this.closest('tr').remove();refreshAll()">Remove</button>
+</td>
+</tr>`)}
+function tableData(id){return qsa(`#${id} tbody tr`).map(tr=>qsa('input,textarea,select',tr).map(x=>x.value));}
+function scoreBarrier(r){let vals=[r[2],r[3],r[4],r[5]], score=vals.reduce((n,v)=>n+(v=='Yes'?1:v=='Partly'?0.5:0),0); return score/4;}
+function refreshAll(){let b=tableData('barrierTable'); b.forEach((r,i)=>{let s=scoreBarrier(r);let tag=s>=0.85?'<span class="badge good">Effective</span>':s>=0.55?'<span class="badge watch">Degraded</span>':'<span class="badge bad">Failed</span>';let cell=qsa('#barrierTable tbody tr')[i]?.children[6]; if(cell)cell.innerHTML=tag}); let avg=b.length?b.reduce((n,r)=>n+scoreBarrier(r),0)/b.length:0; let health=(avg*5).toFixed(1); qs('#kHealth').textContent=b.length?health+'/5':'-'; qs('#kHudson').textContent=avg>=.8?'Proactive':avg>=.6?'Calculative / vulnerable':avg>0?'Reactive':'Not assessed'; qs('#kHudson').className='badge '+(avg>=.8?'good':avg>=.6?'watch':'bad'); let worst=b.length?b.slice().sort((a,c)=>scoreBarrier(a)-scoreBarrier(c))[0]:null; qs('#kBarrier').textContent=worst?worst[0]:'-'; let actions=tableData('actionTable'); let strength=actions.length?Math.round(actions.reduce((n,a)=>n+(a[5].startsWith('High')?3:a[5].startsWith('Medium')?2:1),0)/actions.length*10)/10:0; qs('#kStrength').textContent=actions.length?strength+'/3':'-'; qs('#kStrengthTag').textContent=strength>=2.5?'Strong':strength>=1.8?'Mixed':'Weak'; qs('#kStrengthTag').className='badge '+(strength>=2.5?'good':strength>=1.8?'watch':'bad'); let verified=actions.filter(a=>a[8]=='Effectiveness verified').length; qs('#kEffective').textContent=actions.length?verified+'/'+actions.length:'-'; qs('#kEffTag').textContent=actions.length&&verified==actions.length?'Verified':verified?'Part verified':'Open'; qs('#kEffTag').className='badge '+(actions.length&&verified==actions.length?'good':verified?'watch':'infoB'); updateBowtie(b)}
+function updateBowtie(b){let pre=b.filter(r=>r[1]=='Preventive').map(r=>r[0]).slice(0,5).join('<br>')||'-'; let mit=b.filter(r=>r[1]!='Preventive').map(r=>r[0]).slice(0,5).join('<br>')||'-'; qs('#preBarriers').innerHTML=pre; qs('#mitBarriers').innerHTML=mit}
+function suggestBarriers(){if(tableData('barrierTable').length) return; ['Task risk assessment','Permit to Work approval','Energy isolation / depressurisation','Line of fire control','Supervisor verification','PPE / face protection','Emergency response / first aid'].forEach((x,i)=>addBarrier({name:x,type:i<5?'Preventive':'Mitigating'}));}
+function suggestActions(){if(tableData('actionTable').length) return; addAction({finding:'Residual energy / line of fire risk not adequately controlled',action:'Add residual energy verification hold point to task planning and permit review.',barrier:'Task risk assessment / PTW',owner:'Operations Manager',strength:'Medium - process change',verify:'Sample 10 similar tasks and confirm hold point is used.'}); addAction({finding:'Critical control not independently verified',action:'Introduce supervisor verification checklist for high-risk flange breaking / hose disconnection tasks.',barrier:'Supervisor verification',owner:'Asset Supervisor',strength:'High - engineered / verified control',verify:'Field verification after 30 and 90 days.'});}
+function setBlank(k,v){if(!val(k).trim())set(k,v)}
+function meaningfulRows(id){return tableData(id).filter(r=>r.some(v=>String(v||'').trim()))}
+function aiContext(){return [val('title'),val('problem'),val('facts'),val('evidence'),val('immediate'),val('whyMatters')].join(' ').toLowerCase()}
+function aiProfile(){let t=aiContext();if(/lift|crane|hoist|sling|load/.test(t))return{name:'lifting operation',rule:'LSR: Safe Mechanical Lifting',factors:['Planning assumptions','Supervision / oversight','Competence / familiarity'],barriers:['Lift plan and risk assessment','Equipment certification and pre-use checks','Competent lifting team','Exclusion zone / line-of-fire control','Independent supervisor verification'],weak:'lifting controls'};if(/isolat|energy|pressure|electr|flange|hose|containment/.test(t))return{name:'energy isolation / containment task',rule:'LSR: Energy Isolation',factors:['Planning assumptions','Procedure usability','Supervision / oversight'],barriers:['Task risk assessment','Permit to Work approval','Energy isolation / depressurisation','Line-of-fire control','Supervisor verification','PPE / recovery arrangements'],weak:'energy isolation and line-of-fire controls'};if(/height|ladder|scaffold|fall/.test(t))return{name:'work at height',rule:'LSR: Working at Height',factors:['Planning assumptions','Equipment / interface design','Supervision / oversight'],barriers:['Work-at-height assessment','Certified access equipment','Fall prevention / restraint','Dropped-object controls','Supervisor verification','Rescue plan'],weak:'fall-prevention controls'};if(/confined|vessel entry|tank entry/.test(t))return{name:'confined-space entry',rule:'LSR: Confined Space',factors:['Procedure usability','Communication / handover','Supervision / oversight'],barriers:['Entry permit','Atmospheric testing','Isolation','Standby person and communication','Rescue arrangements','Supervisor verification'],weak:'confined-space controls'};if(/drive|vehicle|road|journey/.test(t))return{name:'driving activity',rule:'LSR: Driving',factors:['Fatigue / workload','Schedule pressure','Leadership monitoring'],barriers:['Journey management plan','Driver competence','Vehicle condition','Fatigue controls','Speed / route controls','Emergency response'],weak:'driving and fatigue controls'};if(/hot work|weld|grind|spark/.test(t))return{name:'hot-work activity',rule:'LSR: Hot Work',factors:['Procedure usability','Supervision / oversight','Communication / handover'],barriers:['Hot-work permit','Gas testing','Isolation / removal of combustibles','Fire watch','Firefighting equipment','Post-work inspection'],weak:'hot-work controls'};return{name:'operational activity',rule:'LSR: Work Authorisation',factors:['Planning assumptions','Procedure usability','Supervision / oversight','Assurance weakness'],barriers:['Task risk assessment','Work authorisation','Competence and task briefing','Critical-control verification','Supervisor oversight','Recovery / emergency arrangements'],weak:'planning, authorisation and verification controls'}}
+function aiReady(){if(!val('problem').trim()&&!val('facts').trim()){aiStatus('Add a problem statement or known facts before running AI Assist.',false);return false}return true}
+function aiStatus(message,ok=true){let e=qs('#aiStatus');if(e)e.innerHTML=`<b>${ok?'Draft created':'More information needed'}.</b> ${esc(message)}`;updateAiState()}
+function updateAiState(){[['aiProblemState','problem'],['aiFactsState','facts'],['aiEvidenceState','evidence']].forEach(([id,k])=>{let e=qs('#'+id);if(e){e.textContent=val(k).trim()?'Ready':'Missing';e.style.color=val(k).trim()?'var(--green)':'var(--amber)'}})}
+function aiDraftCauses(){if(!aiReady())return;let p=aiProfile(),event=val('problem').trim()||'the event';setBlank('immediateCause',`The immediate loss of control occurred during ${p.name}; the precise mechanism must be confirmed against the evidence.`);setBlank('systemCause',`Planning and verification arrangements did not provide sufficient assurance that ${p.weak} remained suitable and effective under the conditions in which the work was actually performed.`);setBlank('fiveWhys',`Why 1: Why did the event occur? — The relevant control did not prevent the loss of control.\nWhy 2: Why did the control not prevent it? — Its suitability or use at the worksite was not fully verified.\nWhy 3: Why was verification insufficient? — The plan relied on assumptions that may not have matched actual conditions.\nWhy 4: Why were those assumptions not challenged? — Stop, reassess and escalation triggers may not have been explicit or routinely tested.\nWhy 5: Why could this persist? — Assurance focused on completion of the process rather than evidence that the critical barrier was effective.`);setBlank('causalStatement',`Because the planned controls for ${p.name} were not fully aligned with or verified against actual worksite conditions, the loss of control described in the case became possible, resulting in ${event.toLowerCase()}.`);aiStatus('Causal drafts added to blank fields. Validate the chain against evidence before accepting it.')}
+function aiDraftOperational(){let p=aiProfile();setBlank('imagined',`The work was expected to proceed in accordance with the approved plan, with competent personnel, suitable conditions and ${p.weak} available and effective.`);setBlank('done',`The available facts indicate that actual conditions, constraints or adaptations may have differed from the planned assumptions. Confirm precisely what changed, who knew and how the team responded.`);setBlank('orgStatement',`The emerging learning concerns how planning, supervision, procedure usability and assurance shaped the conditions for the work. The investigation should test the system conditions that influenced behaviour rather than attributing the event to individual error.`);p.factors.forEach(v=>{let e=qsa('[data-check="org"]').find(x=>x.value==v);if(e)e.checked=true});let rule=qsa('[data-check="org"]').find(x=>x.value==p.rule);if(rule)rule.checked=true}
+function aiDraftBarriers(){if(!aiReady())return;let p=aiProfile();if(!meaningfulRows('barrierTable').length)qs('#barrierTable tbody').innerHTML='';p.barriers.forEach((name,i)=>{if(!meaningfulRows('barrierTable').some(r=>r[0]==name))addBarrier({name,type:i<p.barriers.length-1?'Preventive':'Mitigating',defined:'Partly',present:'Partly',effective:'Partly',verified:'No',comment:'AI hypothesis — confirm status and add objective evidence.'})});setBlank('threats',`Conditions and threats associated with ${p.name}; confirm from the event sequence and evidence.`);setBlank('topEvent','Loss of control described in the problem statement.');setBlank('consequences',val('whyMatters')||'Actual and credible potential consequences to be confirmed.');aiStatus('A starter barrier set has been added. Replace assumptions with evidence and actual control status.')}
+function aiDraftRecommendations(){if(!aiReady())return;let p=aiProfile();if(!meaningfulRows('actionTable').length)qs('#actionTable tbody').innerHTML='';let recs=[[`Weakness in ${p.weak}`,`Introduce a task-specific critical-control verification step for ${p.name}, including a clear stop-and-reassess trigger when conditions differ from the plan.`,`Critical-control verification`,'High - engineered / verified control','Sample comparable live tasks at 30 and 90 days and verify the control in the field.'],['Planning assumptions not tested against operational reality',`Update the planning and pre-start review to record material differences between planned and actual conditions and the decision taken.`,`Task planning / work authorisation`,'Medium - process change','Review a representative sample for evidence that differences were identified, escalated and resolved.'],['Assurance may confirm paperwork rather than control effectiveness',`Add independent field assurance focused on whether the critical barrier is present, effective and understood by the work team.`,`Supervisor / assurance verification`,'High - engineered / verified control','Trend sampled results and repeat findings; close only when sustained improvement is evidenced.']];recs.forEach(r=>{if(!meaningfulRows('actionTable').some(a=>a[1]==r[1]))addAction({finding:r[0],action:r[1],barrier:r[2],owner:'To be assigned',strength:r[3],verify:r[4],status:'Open'})});setBlank('recStrategy',`Strengthen ${p.weak} by improving worksite verification, challenging planning assumptions and requiring evidence of sustained control effectiveness before closure.`);setBlank('recMeasures','Use sampled field assurance, workforce feedback, barrier-status evidence and repeat-event monitoring at defined review points.');setBlank('reviewPlan','Review implementation after 30 days and effectiveness after 90 days using a representative sample of comparable work.');setBlank('closureCriteria','Close only when the recommendation is implemented and objective evidence demonstrates that the relevant barrier is present, effective and routinely verified.');aiStatus('Draft recommendations have been linked to control weaknesses and effectiveness evidence.')}
+function aiDraftSequence(){if(!aiReady())return;let source=(val('facts')||val('problem')).split(/[.!?\n]+/).map(s=>s.trim()).filter(s=>s.length>8).slice(0,8);if(!meaningfulRows('seqTable').length)qs('#seqTable tbody').innerHTML='';source.forEach((s,i)=>addSeq({time:`Step ${i+1}`,event:s,point:'Confirm barrier / decision point',evidence:'Confirm evidence source'}));aiStatus(source.length?'A draft sequence has been created from the factual narrative. Add actual times and evidence sources.':'Not enough factual sentences were available.',!!source.length)}
+function aiDraftAll(){if(!aiReady())return;aiDraftCauses();aiDraftOperational();aiDraftSequence();aiDraftBarriers();aiDraftRecommendations();autoAnalyse();setBlank('whyMatters','The event indicates a potential gap between planned controls and operational reality. Confirm the actual and credible potential consequences, repeat history and wider exposure.');setBlank('whereElse','Identify comparable tasks, sites, teams or assets where the same assumptions and barrier weaknesses may exist.');setBlank('transfer','Share verified learning through targeted operational conversations and assurance sampling, not a generic briefing alone.');refreshAll();saveLocal();aiStatus('The DISCOVER case has been populated as an editable first draft and saved locally. Review every section before using the quality gate.')}
+function aiPrepareReport(){runQualityGate();generateReport();showScreen('report');aiStatus('The quality gate and executive report have been refreshed.')}
+function autoAnalyse(){let themes=meaningfulRows('themeTable'); if(!themes.length){qs('#themeTable tbody').innerHTML='';addTheme({theme:'Operational reality gap',signal:'Work as done did not match planning assumptions.',classification:'Operational Reality',question:'Do procedures reflect the conditions people actually face?'});addTheme({theme:'Verification weakness',signal:'Critical control status was assumed rather than evidenced.',classification:'Leadership & Assurance',question:'How do we know critical controls are working in the field?'});addTheme({theme:'Action effectiveness risk',signal:'Risk of closing actions without proving risk reduction.',classification:'Barrier Management',question:'What evidence is required before closure?'})} refreshAll(); runQualityGate();}
+function runQualityGate(){let checks=[['Problem defined',!!val('problem')],['Facts and evidence captured',!!val('facts')&&!!val('evidence')],['Timeline has at least three entries',tableData('seqTable').length>=3],['Barriers assessed',tableData('barrierTable').length>=3],['System cause captured',!!val('systemCause')],['Operational reality considered',!!val('imagined')&&!!val('done')],['Effective recommendations captured',!!val('recStrategy')&&tableData('actionTable').length>0],['Recommendations include verification method',tableData('actionTable').every(a=>a[6])&&tableData('actionTable').length>0],['Effectiveness review criteria defined',!!val('reviewPlan')&&!!val('closureCriteria')]]; qs('#qualityList').innerHTML=checks.map(c=>`<div>
+<span class="badge ${c[1]?'good':'bad'}">${c[1]?'Pass':'Gap'}</span> <b>${c[0]}</b>
+</div>`).join(''); return checks.every(c=>c[1]);}
+function generateReport(){refreshAll(); let barriers=tableData('barrierTable'), actions=tableData('actionTable'), themes=tableData('themeTable'), seq=tableData('seqTable'); let avg=barriers.length?barriers.reduce((n,r)=>n+scoreBarrier(r),0)/barriers.length:0; let weak=barriers.filter(r=>scoreBarrier(r)<.75); let report=`PDi DISCOVER™ Operational Learning Report\n\nCase: ${val('caseId')||'-'}\nTitle: ${val('title')||'-'}\nAsset / Site: ${val('site')||'-'}\nEvent / Finding Type: ${val('type')||'-'}\nInvestigation Level: ${val('level')||'-'}\nConfidence: ${val('confidence')||'-'}\n\n1. Executive Summary\n${val('problem')||'-'}\n\nWhy this matters\n${val('whyMatters')||'-'}\n\n2. Key Facts and Evidence\n${val('facts')||'-'}\n\nEvidence / gaps\n${val('evidence')||'-'}\n\n3. Sequence of Events\n${seq.length?seq.map((r,i)=>`${i+1}. ${r[0]||'-'} — ${r[1]||'-'} | Barrier / decision point: ${r[2]||'-'} | Evidence: ${r[3]||'-'}`).join('\n'):'-'}\n\n4. Causes and Operational Reality\nImmediate cause: ${val('immediateCause')||'-'}\nSystem cause: ${val('systemCause')||'-'}\n\nWork as imagined:\n${val('imagined')||'-'}\n\nWork as done:\n${val('done')||'-'}\n\n5. Barrier Assurance\nOperational system health: ${barriers.length?(avg*5).toFixed(1)+'/5':'Not assessed'}\nWeak / degraded barriers: ${weak.length}\n\n${barriers.length?barriers.map(r=>`- ${r[0]} (${r[1]}): ${scoreBarrier(r)>=.85?'Effective':scoreBarrier(r)>=.55?'Degraded':'Failed'} | Defined ${r[2]}, Present ${r[3]}, Effective ${r[4]}, Verified ${r[5]} | ${r[7]||''}`).join('\n'):'-'}\n\n6. Organisational Contributors\n${qsa('[data-check="org"]:checked').map(x=>'- '+x.value).join('\n')||'-'}\n\nOrganisational learning statement:\n${val('orgStatement')||'-'}\n\n7. Effective Recommendations\nRecommendation strategy:\n${val('recStrategy')||'-'}\n\nEffectiveness measures:\n${val('recMeasures')||'-'}\n\nRecommendations:\n${actions.length?actions.map((a,i)=>`${i+1}. ${a[1]||'-'}\n   Finding / cause: ${a[0]||'-'}\n   Barrier strengthened: ${a[2]||'-'}\n   Owner / due: ${a[3]||'-'} / ${a[4]||'-'}\n   Action strength: ${a[5]||'-'}\n   Verification method: ${a[6]||'-'}\n   Effectiveness evidence: ${a[7]||'-'}\n   Status: ${a[8]||'-'}`).join('\n\n'):'-'}\n\n8. Learning Intelligence\n${themes.length?themes.map(t=>`- ${t[0]}: ${t[1]} | ${t[2]} | Leadership question: ${t[3]}`).join('\n'):'-'}\n\n9. Review Effectiveness and Reinforce Learning\nWhere else could this happen?\n${val('whereElse')||'-'}\n\nLearning transfer required:\n${val('transfer')||'-'}\n\nEffectiveness review plan:\n${val('reviewPlan')||'-'}\n\nClosure criteria:\n${val('closureCriteria')||'-'}\n\nLeadership Message\nThis case should not be closed on action completion alone. Closure should be based on evidence that the relevant barriers are now defined, present, effective and verified, and that the risk of recurrence has been reduced.`; qs('#reportText').textContent=report; return report;}
+function copyReport(){navigator.clipboard.writeText(qs('#reportText').textContent); alert('Report copied.')}
+function downloadReport(){let blob=new Blob([generateReport()],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(val('caseId')||'DISCOVER')+'_report.txt';a.click()}
+function exportCase(){let blob=new Blob([JSON.stringify(collect(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(val('caseId')||'PDi-DISCOVER-case')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function importCase(file){if(!file)return;let reader=new FileReader();reader.onload=()=>{try{apply(JSON.parse(reader.result));saveLocal();alert('Case imported and saved in this browser.')}catch(e){alert('This is not a valid DISCOVER case file.')}};reader.readAsText(file)}
+function collect(){let d={fields:{},checks:[],seq:tableData('seqTable'),barriers:tableData('barrierTable'),actions:tableData('actionTable'),themes:tableData('themeTable')};qsa('[data-key]').forEach(e=>d.fields[e.dataset.key]=e.value);qsa('[data-check="org"]:checked').forEach(e=>d.checks.push(e.value));return d}
+function apply(d){qsa('[data-key]').forEach(e=>e.value=(d.fields||{})[e.dataset.key]||'');qsa('[data-check="org"]').forEach(e=>e.checked=(d.checks||[]).includes(e.value));qs('#seqTable tbody').innerHTML='';(d.seq||[]).forEach(r=>addSeq({time:r[0],event:r[1],point:r[2],evidence:r[3]}));qs('#barrierTable tbody').innerHTML='';(d.barriers||[]).forEach(r=>addBarrier({name:r[0],type:r[1],defined:r[2],present:r[3],effective:r[4],verified:r[5],comment:r[7]}));qs('#actionTable tbody').innerHTML='';(d.actions||[]).forEach(r=>addAction({finding:r[0],action:r[1],barrier:r[2],owner:r[3],due:r[4],strength:r[5],verify:r[6],evidence:r[7],status:r[8]}));qs('#themeTable tbody').innerHTML='';(d.themes||[]).forEach(r=>addTheme({theme:r[0],signal:r[1],classification:r[2],question:r[3]}));refreshAll();}
+function saveLocal(){localStorage.setItem('pdi_discover_ols',JSON.stringify(collect()));alert('Saved in browser.')}
+function loadLocal(){let d=localStorage.getItem('pdi_discover_ols');if(d)apply(JSON.parse(d));else alert('No saved case found.')}
+function resetAll(){if(confirm('Clear all fields?')){localStorage.removeItem('pdi_discover_ols');location.reload()}}
+function loadExample(){apply({fields:{caseId:'DISC-001',title:'Hand injury during flange removal',site:'Example Asset',level:'Plus',type:'Incident',actual:'Medium',potential:'High',problem:'An operator suffered a hand injury while removing a flange during maintenance activities.',whyMatters:'A similar line-of-fire deviation had been observed previously. The credible worst case was a more serious hand injury or loss of containment if residual tension or pressure had been released suddenly.',tor:'Review the maintenance task, control of work arrangements, line-of-fire controls, planning assumptions and action effectiveness requirements.',immediate:'Work stopped, first aid provided, area made safe, supervisor informed.',facts:'Permit was in place. Toolbox talk was completed. Gloves were worn. Access around the flange was restricted. The job was behind schedule. Operators adjusted the removal sequence to complete the task.',evidence:'Permit pack, task risk assessment, supervisor interview, worker interview, photographs of access constraints and previous assurance observation.',immediateCause:'The operator placed their hand in the line of fire during flange removal.',systemCause:'Task planning did not adequately recognise restricted access and residual tension risks, and supervision did not verify that the planned sequence remained suitable at the worksite.',recStrategy:'Recommendations focus on strengthening the line-of-fire barrier, improving supervisor verification, and updating task guidance so planned controls better reflect actual worksite conditions.',recMeasures:'Effectiveness will be measured through sampled assurance of similar tasks, evidence of supervisor verification, reduced line-of-fire deviations, and no repeat events within the review period.',imagined:'The procedure assumed good access, adequate time and a standard flange removal sequence.',done:'The work was completed in restricted access, under schedule pressure, with the sequence adapted in the field.',orgStatement:'The event indicates a gap between planned controls and field execution. The issue is not only procedure compliance; it is whether the procedure and task plan were resilient to actual worksite conditions.',verifiedBy:'Findings were verified through permit review, site photographs, worker interview and supervisor interview.',confidence:'High',whereElse:'Similar flange breaking, hose disconnection and mechanical maintenance tasks where access is restricted or residual energy may be present.',transfer:'Share learning with maintenance teams and include in supervisor safety conversation pack.',reviewPlan:'After 90 days, sample 15 similar tasks to verify line-of-fire controls, supervisor verification and residual energy checks.',closureCriteria:'Close only when sampled assurance demonstrates that updated controls are being used and no repeat line-of-fire deviations are identified.'},checks:['Planning assumptions','Schedule pressure','Supervision / oversight','Procedure usability','Assurance weakness'],seq:[['09:00','Permit issued and task briefed','PTW / TBT','Permit pack'],['09:20','Team prepared flange removal','Task planning','Witness notes'],['09:35','Restricted access required change to body position','Line of fire decision point','Photos'],['09:40','Operator hand injured during removal','Loss of control','First aid record'],['09:45','Work stopped and area made safe','Recovery barrier','Supervisor notes']],barriers:[['Task risk assessment','Preventive','Yes','Yes','Partly','Partly','Auto','Did not fully address restricted access and line-of-fire conditions.'],['Permit to Work approval','Preventive','Yes','Yes','Yes','Partly','Auto','Permit was in place but did not test changed work conditions.'],['Line of fire control','Preventive','Partly','Partly','No','No','Auto','Control failed at the workface.'],['Supervisor verification','Preventive','Yes','Partly','Partly','No','Auto','No independent check that work sequence remained suitable.'],['Gloves / PPE','Mitigating','Yes','Yes','Partly','Yes','Auto','Reduced injury but did not prevent hand placement.']],actions:[['Line-of-fire risk not adequately controlled','Introduce a pre-start line-of-fire verification prompt for flange breaking and similar mechanical tasks.','Line of fire control','Maintenance Supervisor','','Medium - process change','Sample 15 similar jobs within 90 days.','','Open'],['Supervisor verification not effective','Add independent supervisor verification for high-risk mechanical breaking tasks where access is restricted.','Supervisor verification','Ops Manager','','High - engineered / verified control','Field assurance checks at 30 and 90 days.','','Open'],['Procedure did not reflect field reality','Update task guidance to address restricted access, residual tension and stop/re-plan triggers.','Task risk assessment','Technical Authority','','Medium - process change','Review updated guidance against three live tasks.','','Open']],themes:[['Operational reality gap','Procedure assumptions did not match field access constraints.','Operational Reality','Where else do procedures assume ideal access?'],['Verification weakness','Controls were assumed through permit issue rather than verified at the worksite.','Leadership & Assurance','How does leadership know controls are effective in the field?'],['Action effectiveness risk','Traditional closure could stop at briefing without evidence of risk reduction.','Barrier Management','What evidence is needed before closure?']]}); showScreen('dashboard',qsa('.nav button')[0]);}
+qsa('input,textarea,select').forEach(e=>e.addEventListener('input',()=>{refreshAll();updateAiState()})); addSeq(); addBarrier(); addAction(); addTheme(); refreshAll();updateAiState();
+</script>
+</body>
+</html>

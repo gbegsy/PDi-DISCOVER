@@ -1,0 +1,9 @@
+{
+  "name": "pdi-discover-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PDi DISCOVER editable operational learning prototype",
+  "scripts": {
+    "test": "node tests/static-check.js"
+  }
+}
